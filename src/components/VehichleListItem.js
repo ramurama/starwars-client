@@ -26,7 +26,7 @@ export default props => {
       style={[styles.mainView, styles.shadow]}
     >
       <View style={[styles.row]}>
-        <View style={{ flex: 1, flex: 'column' }}>
+        <View style={{ flex: 1, flexDirection: 'column' }}>
           <Text style={styles.nameText}>{name}</Text>
           <Text style={styles.modelText}>{model}</Text>
         </View>

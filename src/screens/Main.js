@@ -29,7 +29,6 @@ class Main extends React.Component {
           vehicles: [...this.state.vehicles, ...results],
           nextPage: next
         });
-        console.log(results);
       } catch (err) {
         console.error(err);
       }
