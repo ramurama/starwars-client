@@ -36,8 +36,8 @@ const styles = StyleSheet.create({
     color: LABEL_COLOR
   },
   valueText: {
-    fontSize: 16,
+    fontSize: 18,
     color: VALUE_COLOR,
-    fontWeight: '600'
+    fontWeight: 'bold'
   }
 });

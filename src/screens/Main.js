@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, StatusBar } from 'react-native';
 import Container from '../components/Container';
 import VehicleListItem from '../components/VehichleListItem';
 import { API_VEHICLE_BASE } from '../config/api';
@@ -49,11 +49,13 @@ class Main extends React.Component {
   render() {
     return (
       <Container>
+        <StatusBar barStyle='light-content' />
+
         <View style={{ flex: 1 }}>
           <FlatList
             data={this.state.vehicles}
             extraData={this.state}
-            keyExtractor={(item, index) => index}
+            keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => (
               <VehicleListItem
                 data={item}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {} from 'react-native';
+import { StatusBar } from 'react-native';
 import Container from '../components/Container';
 import Spinner from '../components/Spinner';
 import DescriptionRow from '../components/DescriptionRow';
@@ -46,6 +46,7 @@ class Vehicle extends React.Component {
 
     return (
       <Container>
+        <StatusBar barStyle='light-content' />
         {this._renderRow('Name', name)}
         {this._renderRow('Model', model)}
         {this._renderRow('Cost in credits', cost_in_credits)}
