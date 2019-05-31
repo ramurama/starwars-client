@@ -60,6 +60,7 @@ class Main extends React.Component {
                 data={item}
                 onPress={() =>
                   this.props.navigation.navigate('vehicle', {
+                    title: item.name,
                     url: item.url
                   })
                 }

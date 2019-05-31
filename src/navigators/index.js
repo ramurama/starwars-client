@@ -12,9 +12,9 @@ const mainNaVigator = createStackNavigator({
   },
   vehicle: {
     screen: Vehicle,
-    navigationOptions: {
-      title: 'Vehicle Details'
-    }
+    navigationOptions: ({ navigation }) => ({
+      title: `${navigation.state.params.title}`
+    })
   }
 });
 
