@@ -1,8 +1,9 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, Button } from 'react-native';
 import Container from '../components/Container';
 import Spinner from '../components/Spinner';
 import DescriptionRow from '../components/DescriptionRow';
+import { Audio } from 'expo';
 
 class Vehicle extends React.Component {
   constructor(props) {
@@ -11,11 +12,17 @@ class Vehicle extends React.Component {
       data: {},
       spinner: false
     };
+    this.soundObject = new Audio.Sound();
+    this.isSoundLoaded = false;
   }
 
   componentDidMount() {
     const url = this.props.navigation.getParam('url');
-    this.setState({ spinner: true }, () => this._fetchVehicleDetails(url));
+
+    this.setState({ spinner: true }, () => {
+      this._fetchVehicleDetails(url);
+      this._loadSound();
+    });
   }
 
   _fetchVehicleDetails(url) {
@@ -27,6 +34,27 @@ class Vehicle extends React.Component {
 
   _renderRow(label, value) {
     return <DescriptionRow label={label} value={value} />;
+  }
+
+  async _loadSound() {
+    try {
+      await this.soundObject.loadAsync({
+        uri: 'https://www.soundjay.com/button/button-1.mp3'
+      });
+      this.isSoundLoaded = true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async _playSound() {
+    if (this.isSoundLoaded) {
+      try {
+        await this.soundObject.replayAsync();
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
 
   render() {
@@ -57,6 +85,7 @@ class Vehicle extends React.Component {
         {this._renderRow('Cargo Capacity', cargo_capacity)}
         {this._renderRow('Consumables', consumables)}
         {this._renderRow('Vehicle class', vehicle_class)}
+        <Button title='Play' onPress={() => this._playSound()} />
         <Spinner enable={this.state.spinner} />
       </Container>
     );
